@@ -3,6 +3,7 @@ ruby '2.0.0'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.0.4'
+gem 'rest-client'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
