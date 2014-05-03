@@ -1,0 +1,4 @@
+# Make a application.yml file and fill in with real values
+
+FOURSQUARE_CLIENT_ID: ''
+CORPSQUARE_SECRET: ''
