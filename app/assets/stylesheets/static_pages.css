@@ -31,8 +31,7 @@ html{
 .tagline{
 	font-size: 1.5em;
 	width: 50%;
-	margin-left:auto;
-	margin-right:auto;
+	margin: 2em auto auto auto;
   color:  #fff;
 }
 
@@ -66,5 +65,15 @@ button:hover{
   margin-bottom: 20px; 
   box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 ); 
   clear: both; 
+}
 
+.card-wrapper{
+  background-color: #fff;
+  width:20%;
+  margin: 1em;
+  height: 100%;
+}
+
+.card-headline{
+  font-size: 1em;
 }
