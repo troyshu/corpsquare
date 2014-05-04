@@ -7,5 +7,10 @@
 <script>
 	var entriesJson = <%= @expenseEntries.to_s.html_safe %>;
 	console.log(entriesJson);
+  entriesJson['entries'].forEach(function(entry, index, array){
+      var results = entry['VendorDescription'].split(',');
+      entry['VendorName'] = results[0];
+      entry['VendorCity'] = results[1];
+  });
 </script>
 
