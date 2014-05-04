@@ -48,9 +48,10 @@
           query = "&query="+venue.name;
           //console.log('venue.name: '+venue.name);
           $.get( baseurl + query, function( data ) {
-          	console.log(data.response.venues);
+          	console.log(data.response.venues[0]);
             venue['latitude'] = data.response.venues[0].location.lat;
             venue['longitude'] = data.response.venues[0].location.lng;
+            venue['address'] = data.response.venues[0].location.address+", "+data.response.venues[0].location.city;
             //$( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
           });
         });
@@ -132,8 +133,9 @@
   	//loop over venues by location
   	venuesByLocation.forEach(function(venue, index){
   		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
-  			<div class=\"expense-vendor\">"+venue.name+" \
-  			<div class=\"expense-amount\">$"+parseFloat(venue.amount).toFixed(2).toString()+" \
+  			<div class=\"expense-vendor\">"+venue.name+"</div>\
+  			<div class=\"expense-amount\">$"+parseFloat(venue.amount).toFixed(2).toString()+"</div>\
+  			<div class=\"expense-address\">"+venue.address+"</div> \
   			</div>");
   	});
 
