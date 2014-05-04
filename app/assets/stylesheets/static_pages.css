@@ -13,7 +13,7 @@ html{
 
 #expense-overlays{
   position:absolute;
-  top: 220px;
+  top: 20px;
   left: 10px;
   z-index: 99;
 }
@@ -22,6 +22,10 @@ body, #map-canvas {
   height: 100%;
   margin: 0px;
   padding: 0px
+}
+
+#frame-id {
+
 }
 
 .frame {

@@ -1,7 +1,7 @@
 <%= javascript_include_tag params[:static_pages] %>
 <%= stylesheet_link_tag "static_pages" %>
 	
-<div class="frame">
+<div id="frame-id" class="frame">
 
 
 
@@ -28,6 +28,7 @@
   });
 
 // global variables
+  var venueReadyCount = 0;
   var placesvisited;
   var centerLatlng;
   var mapOptions;
@@ -38,23 +39,52 @@
   //New York hard coded, change
   var baseurl = "https://api.foursquare.com/v2/venues/search?near=New York, NY&oauth_token=EKPQAGKVMLBNB2VCDWREWFSJJHNCRGRQEEEKJTJ10JS5E0WY&v=20140503"
 
+  
+  var waitUntil = function (fn, condition, interval) {
+	    interval = interval || 100;
+
+	    var shell = function () {
+	            var timer = setInterval(
+	                function () {
+	                    var check;
+
+	                    try { check = !!(condition()); } catch (e) { check = false; }
+
+	                    if (check) {
+	                        clearInterval(timer);
+	                        delete timer;
+	                        fn();
+	                    }
+	                },
+	                interval
+	            );
+	        };
+
+	    return shell;
+	};
+
   function populateVenues() {
   	//console.log('venues');
   	//console.log(venues);
 
     venues.forEach(function(venue,index)
-        {
+    {
 
-          query = "&query="+venue.name;
-          //console.log('venue.name: '+venue.name);
-          $.get( baseurl + query, function( data ) {
-          	console.log(data.response.venues[0]);
-            venue['latitude'] = data.response.venues[0].location.lat;
-            venue['longitude'] = data.response.venues[0].location.lng;
-            venue['address'] = data.response.venues[0].location.address;
-            //$( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
-          });
-        });
+      query = "&query="+venue.name;
+      //console.log('venue.name: '+venue.name);
+      $.get( baseurl + query, function( data ) {
+      	//console.log('data.response.venues[0]');
+      	//console.log(data.response.venues[0]);
+        venue['latitude'] = data.response.venues[0].location.lat;
+        venue['longitude'] = data.response.venues[0].location.lng;
+        venue['address'] = data.response.venues[0].location.address;
+        console.log(venue);
+        //$( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
+      }).done(function() {
+      	venueReadyCount += 1;
+      	console.log(venueReadyCount);
+      });
+    });
   }
 
   var getVenuesByLocation = function(inputLocation) {
@@ -113,6 +143,8 @@
   }
 
   function drawMap(){
+  	//remove frame
+  	$("#frame-id").css("display", "none");
     //console.log('inside drawMap');
     //console.log('venuesByLocation');
     //console.log(venuesByLocation);
@@ -131,32 +163,64 @@
   	//expenseOverlayDiv.html("blah blah blah blah blah blah blah blah blah blah blah blah");
 
   	//loop over venues by location
-  	venuesByLocation.forEach(function(venue, index){
-  		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
-  			<div class=\"expense-vendor\">"+venue.name+" - <span class=\"expense-address\">"+venue.address+"</span></div>\
-  			<div class=\"expense-amount\">Total amount spent: $"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
-  			</div>");
-  	});
+  	count=0;
+  	try {
+	  	venuesByLocation.forEach(function(venue, index){
+	  		count+=1;
+	  		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
+	  			<div class=\"expense-vendor\">"+venue.name+" - <span class=\"expense-address\">"+venue.address+"</span></div>\
+	  			<div class=\"expense-amount\">Total amount spent: $"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
+	  			</div>");
+	  		if (count==5) {
+	  			throw BreakException;
+	  		}
+	  	});
+	} catch(e) {
+		if (e!==BreakException) throw e;
+	}
+
 
   }
 
   var submitLocation = function(event) {
     event.preventDefault();
     inputLocation = $('#input-location').val();
+    populateVenues();
     getVenuesByLocation(inputLocation);
-    initializeMap();
-    drawMap();
-    //scroll to bottom
-    console.log($(document).height());
-    //$("body").animate({ scrollTop: $(document).height() }, 1000);
-    $("body").animate({ scrollTop: 175 }, "slow");
+    console.log("venues.length: "+venues.length);
+
     
-    //overlay expenses
-    overlayExpenses();
+    waitUntil(
+	  function () {
+	    // the code you want to run here...
+	    console.log('venueReadyCount');
+    	console.log(venueReadyCount); //0, so no venues are ready...
+    	initializeMap();
+
+	    console.log("venuesByLocation: "+venuesByLocation);
+	    console.log(venuesByLocation); //now defined... have to wait
+
+	    drawMap();
+	    //scroll to bottom
+	    console.log($(document).height());
+	    //$("body").animate({ scrollTop: $(document).height() }, 1000);
+	    //$("body").animate({ scrollTop: 175 }, "slow");
+	    
+	    //overlay expenses
+	    overlayExpenses();
+	  },
+	  function() {
+	    // the code that tests here... (return true if test passes; false otherwise)
+	    return !!(venueReadyCount==venues.length-1);
+	  },
+	  50 // amount to wait between checks
+	)();
+
+    
   }
 
   $( document ).ready(function() {
-      populateVenues();
+      
       $('#submit-location-button').click(submitLocation);
   });
 </script>
