@@ -194,3 +194,15 @@ video#bgvid {
   background-size: cover;
 }
 
+#content{
+  font-family: 'Lato', sans-serif;
+}
+
+#firstHeading{
+  font-size: 1.5em;
+}
+
+#bodyContent{
+  font-size: 1em;
+}
+
