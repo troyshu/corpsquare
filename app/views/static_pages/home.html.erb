@@ -32,10 +32,16 @@
       venue['name'] = results[0];
       venue['city'] = results[1];
       venue['amount'] = entry['ApprovedAmount'];
+      console.log('venue');
+      console.log(venue);
+      //venue['lastdate'] = 
       venues.push(venue);
   });
 
 // global variables
+  var markers = new Array();
+  var currentlyOpenInfobox = null;
+  var infowindows = new Array();
   var venueReadyCount = 0;
   var placesvisited;
   var centerLatlng;
@@ -81,11 +87,12 @@
       query = "&query="+venue.name;
       //console.log('venue.name: '+venue.name);
       $.get( baseurl + query, function( data ) {
-      	//console.log('data.response.venues[0]');
-      	//console.log(data.response.venues[0]);
+      	console.log('data.response.venues[0]');
+      	console.log(data.response.venues[0]);
         venue['latitude'] = data.response.venues[0].location.lat;
         venue['longitude'] = data.response.venues[0].location.lng;
         venue['address'] = data.response.venues[0].location.address;
+        venue['url'] = data.response.venues[0].url;
         console.log(venue);
         //$( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
       }).done(function() {
@@ -99,14 +106,17 @@
     //console.log('inside getVenuesByLocation');
     //console.log('venues:');
     //console.log(venues);
+    venueCount = 0;
     venues.forEach(function(venue, index){
       //console.log('inside venues forEach');
         if(venue.city.toLowerCase() === inputLocation.toLowerCase()) {
+          venue['venueCount'] = venueCount;
           //console.log('venue:');
           //console.log(venue);
           venuesByLocation.push(venue);
           //console.log('venuesByLocation');
           //console.log(venuesByLocation);
+          venueCount+=1;
         }
     });
   }
@@ -139,14 +149,17 @@
     var infowindow = new google.maps.InfoWindow({
         content: contentString
     });
+    infowindows.push(infowindow);
 
     var marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
         title: 'Uluru (Ayers Rock)'
     });
+    markers.push(marker);
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map,marker);
+      currentlyOpenInfobox = infowindow;
     });
   }
 
@@ -177,19 +190,41 @@
   	try {
 	  	venuesByLocation.forEach(function(venue, index){
 	  		count+=1;
-	  		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
-	  			<div class=\"expense-vendor\">"+venue.name+" - <span class=\"expense-address\">"+venue.address+"</span></div>\
+	  		expenseOverlayDiv.append("<div id=\"expense-overlay-card-"+venue.venueCount+"\" class=\"expense-overlay-card\"> \
+	  			<div class=\"expense-vendor\"><a href=\""+venue.url+"\" target=\"_blank\">"+venue.name+"</a> - <span class=\"expense-address\">"+venue.address+"</span></div>\
 	  			<div class=\"expense-amount\">Total amount spent: $"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
 	  			</div>");
+
 	  		if (count==5) {
 	  			throw BreakException;
 	  		}
+
+	  		expenseDiv = $('#expense-overlay-card-'+venue.venueCount);
+
+	  		expenseDiv.bind('click', { venueCount: venue.venueCount }, function(event) {
+	  			//close currently open marker
+	  			if (currentlyOpenInfobox!=null)	{
+	  				console.log('currentlyOpenInfobox');
+	  				console.log(currentlyOpenInfobox);
+	  				currentlyOpenInfobox.close();
+	  			}
+
+			    var data = event.data;
+			    curMarker = markers[data.venueCount];
+			    infowindow = infowindows[data.venueCount];
+			    currentlyOpenInfobox = infowindow;
+			    google.maps.event.trigger(curMarker, 'click');
+			});
+
+	  		//expenseDiv.click(openMarker(venue.venueCount));
+
 	  	});
 	} catch(e) {
 		
 	}
 
-	 //show filters
+	//show filters
+	
   	$('#filter-id').show(1000);
   	expenseOverlayDiv.show(1000);
 
@@ -215,13 +250,17 @@
 	    console.log(venuesByLocation); //now defined... have to wait
 
 	    drawMap();
+
 	    //scroll to bottom
-	    console.log($(document).height());
+	    //console.log($(document).height());
 	    //$("body").animate({ scrollTop: $(document).height() }, 1000);
 	    //$("body").animate({ scrollTop: 175 }, "slow");
 	    
 	    //overlay expenses
 	    overlayExpenses();
+
+	    //console.log("infowindows");
+	    //console.log(infowindows);
 	  },
 	  function() {
 	    // the code that tests here... (return true if test passes; false otherwise)
@@ -235,11 +274,20 @@
 
   $( document ).ready(function() {
       $('#submit-location-button').click(submitLocation);
+
       $('#filter-id').hide();
 
-
-
   });
+
+  $(document).keypress(function(e) {
+	    /*
+	    if(e.which == 13) {
+	        //enter is pressed
+	        console.log('enter');
+	        submitLocation();
+	    }
+	    */
+	});
 </script>
 
 
