@@ -16,11 +16,12 @@ class StaticPagesController < ApplicationController
   		response = RestClient.get "https://www.concursolutions.com/api/expense/expensereport/v2.0/report/#{reportId}", { 'Authorization' => "Oauth MQHO89lqHVPrMtHTtLF3CAaf0Co=", "accept" => "application/json"}
   		#logger.debug("repord entry response: #{response}")
   		responseJson = JSON.parse(response)
-  		entries = responseJson['ExpenseEntriesList'].split(",")
+  		entries = responseJson['ExpenseEntriesList']
+  		#logger.debug("ExpenseEntriesList: #{entries}")
 
   		entries.each do |entry|
   			#logger.debug("entry 0: #{entry[0]}")
-  			expenseEntryList.push(entry[0].to_s)
+  			expenseEntryList.push(entry.to_json)
   		end
 
   		
