@@ -133,8 +133,8 @@
   	//loop over venues by location
   	venuesByLocation.forEach(function(venue, index){
   		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
-  			<div class=\"expense-vendor\">"+venue.name+" - "+venue.address+"</div>\
-  			<div class=\"expense-amount\">$"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
+  			<div class=\"expense-vendor\">"+venue.name+" - <span class=\"expense-address\">"+venue.address+"</span></div>\
+  			<div class=\"expense-amount\">Total amount spent: $"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
   			</div>");
   	});
 
