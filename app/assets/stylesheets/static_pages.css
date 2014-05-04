@@ -91,6 +91,10 @@ button:hover{
   clear: both; 
 }
 
+#filter-id {
+
+}
+
 .filter{
   position:absolute;
   top: 20px;
@@ -111,7 +115,7 @@ button:hover{
   float:left;
 }
 
-a:link, a:visited{
+.filter a:link, .filter a:visited{
   display:block;
   width:140px;
   font-weight:400;
@@ -123,7 +127,7 @@ a:link, a:visited{
   opacity: .5;
 }
 
-a:hover,a:active{
+.filter a:hover, .filter a:active{
   text-decoration:underline;
 }
 
@@ -154,5 +158,13 @@ a:hover,a:active{
   font-size: .8em;
   padding-top: .3em;
   padding-left: 1.6em;
+}
+
+video#bgvid {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background: url(/assets/bg.jpg) no-repeat;
+  background-size: cover;
 }
 

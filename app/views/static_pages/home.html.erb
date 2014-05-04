@@ -1,5 +1,10 @@
 <%= javascript_include_tag params[:static_pages] %>
 <%= stylesheet_link_tag "static_pages" %>
+
+<video autoplay loop poster="/assets/bg.jpg" id="bgvid">
+<source src="bg.webm" type="video/webm">
+<source src="bg.mp4" type="video/mp4">
+</video>
 	
 <div id="frame-id" class="frame">
 
@@ -162,7 +167,9 @@
   function overlayExpenses() {
   	//append div to body
   	expenseOverlayDiv = $("#expense-overlays");
-  	//expenseOverlayDiv.html("blah blah blah blah blah blah blah blah blah blah blah blah");
+  	expenseOverlayDiv.hide();
+
+
 
   	//loop over venues by location
   	count=0;
@@ -178,8 +185,12 @@
 	  		}
 	  	});
 	} catch(e) {
-		if (e!==BreakException) throw e;
+		
 	}
+
+	 //show filters
+  	$('#filter-id').show(1000);
+  	expenseOverlayDiv.show(1000);
 
 
   }
@@ -222,15 +233,15 @@
   }
 
   $( document ).ready(function() {
-      
       $('#submit-location-button').click(submitLocation);
+      $('#filter-id').hide();
   });
 </script>
 
 
 <div class="inner">
 </div>
-<div class="filter">
+<div class="filter" id="filter-id">
 	<ul>
 		<li><a href="#">Meals</a></li>
 		<li><a href="#">Entertainment</a></li>
