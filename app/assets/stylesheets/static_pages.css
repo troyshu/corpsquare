@@ -147,6 +147,7 @@ button:hover{
   margin: 2em 3em;
   height:5em;
   opacity: 0.9;
+  border: 2px solid transparent;
 }
 
 .expense-overlay-card:hover{
