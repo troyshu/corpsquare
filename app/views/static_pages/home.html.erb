@@ -26,15 +26,22 @@
   var entriesJson = <%= @expenseEntries.to_s.html_safe %>;
   var venues = [];
   var inputLocation;
+
+
+
+  
+
   entriesJson['entries'].forEach(function(entry, index, array){
       var venue = {}
       var results = entry['VendorDescription'].split(',');
       venue['name'] = results[0];
       venue['city'] = results[1];
       venue['amount'] = entry['ApprovedAmount'];
-      console.log('venue');
-      console.log(venue);
-      //venue['lastdate'] = 
+      randomDay = Math.floor((Math.random() * 30) + 1);
+      randomDate = new Date(2014,4,randomDay)
+      venue['lastdate'] = (randomDate.getMonth()+1).toString()+"/"+randomDate.getDate()+"/"+randomDate.getFullYear();
+      //console.log('lastdate');
+      //console.log(venue['lastdate']);
       venues.push(venue);
   });
 
@@ -154,7 +161,7 @@
     var marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
-        title: 'Uluru (Ayers Rock)'
+        title: vendorName
     });
     markers.push(marker);
     google.maps.event.addListener(marker, 'click', function() {
@@ -192,7 +199,9 @@
 	  		count+=1;
 	  		expenseOverlayDiv.append("<div id=\"expense-overlay-card-"+venue.venueCount+"\" class=\"expense-overlay-card\"> \
 	  			<div class=\"expense-vendor\"><a href=\""+venue.url+"\" target=\"_blank\">"+venue.name+"</a> - <span class=\"expense-address\">"+venue.address+"</span></div>\
+	  			\
 	  			<div class=\"expense-amount\">Total amount spent: $"+parseFloat(venue.amount).toFixed(2).toString()+"</div> \
+	  			<div class=\"expense-lastdate\">Last visited "+venue.lastdate+"</div> \
 	  			</div>");
 
 	  		if (count==5) {
