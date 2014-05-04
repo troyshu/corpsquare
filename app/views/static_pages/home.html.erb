@@ -1,8 +1,11 @@
 <%= javascript_include_tag params[:static_pages] %>
 <%= stylesheet_link_tag params[:static_pages] %>
 
-<div class="home-wrapper">
-		<div class="logo"><img src="/assets/corpsquare.png" /></div>
+<div class="frame">
+		<span class="helper"></span><div class="logo"><img src="/assets/corpsquare.png" /></div>
+</div>
+
+	<div id="input-location-div">Location: <input type="text" id="input-location"><button id="submit-location-button" type="button">Submit</button></div>
 
 		<div id="input-location-div">
 			<input type="text" id="input-location">
