@@ -93,10 +93,10 @@ button:hover{
 
 .filter{
   position:absolute;
-  top: 25px;
-  left: 10px;
+  top: 20px;
+  left: 20px;
   z-index: 99;
-  margin-left: 40px;
+  margin-left: 50px;
 }
 
 .filter ul{
@@ -104,6 +104,7 @@ button:hover{
   margin:0;
   padding:0;
   overflow: hidden;
+
 }
 
 .filter li{
@@ -113,12 +114,12 @@ button:hover{
 a:link, a:visited{
   display:block;
   width:140px;
-  font-weight:bold;
-  color:#FFFFFF;
+  font-weight:400;
+  color:#000;
   text-align:center;
   padding:.2em;
   text-decoration:none;
-  background-color: #000;
+  background-color: rgba(206, 206, 206, .5);
   opacity: .5;
 }
 
