@@ -1,9 +1,14 @@
 <%= javascript_include_tag params[:static_pages] %>
 <%= stylesheet_link_tag "static_pages" %>
+<!--
+<video autoplay loop poster="/assets/bg.jpg" id="bgvid">
+	<source src="/assets/bg.mp4" type="video/mp4">
+</video>
+-->
 
 <video autoplay loop poster="/assets/bg.jpg" id="bgvid">
-<source src="bg.webm" type="video/webm">
-<source src="bg.mp4" type="video/mp4">
+  <source src="/assets/bg.webm" type="video/webm"></source>
+  
 </video>
 	
 <div id="frame-id" class="frame">
@@ -235,6 +240,9 @@
   $( document ).ready(function() {
       $('#submit-location-button').click(submitLocation);
       $('#filter-id').hide();
+
+
+
   });
 </script>
 
