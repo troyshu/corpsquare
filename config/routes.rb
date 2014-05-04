@@ -1,6 +1,7 @@
 Corpsquare::Application.routes.draw do
   # get "static_pages/home"
   get "/" => "static_pages#home", :as => "root"
+  get "/map" => "static_pages#map"
 
   get "static_pages/help"
   # The priority is based upon order of creation: first created -> highest priority.
