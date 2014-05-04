@@ -55,7 +55,7 @@ body, #map-canvas {
 
 .powered-by{
   text-align: center;
-  margin-top:20%;
+  margin-top:60px;
   color:#fff;
 }
 
@@ -121,13 +121,18 @@ button:hover{
   font-weight:400;
   color:#000;
   text-align:center;
-  padding:.2em;
+  padding:.5em;
   text-decoration:none;
   background-color: #fff;
 }
 
 .filter a:hover, .filter a:active{
   text-decoration:underline;
+}
+
+.filter a.selected {
+  color:white;
+  background-color:#666;
 }
 
 
