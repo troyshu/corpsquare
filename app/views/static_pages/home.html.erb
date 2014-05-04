@@ -29,8 +29,6 @@
           
           query = "&query="+venue.vendorName;
           $.get( baseurl + query, function( data ) {
-            console.log('data!!!!!!');
-            console.log(data);
             venue['latitude'] = data.response.venues[1].location.lat;
             venue['longitude'] = data.response.venues[1].location.lng;
             $( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
