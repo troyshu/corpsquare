@@ -59,6 +59,11 @@ body, #map-canvas {
   color:#fff;
 }
 
+.powered-by a{
+  color:#fff;
+  text-decoration: none;
+}
+
 button{
   border: 2px solid #fff;
   font-size: 1.2em;
