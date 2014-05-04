@@ -93,17 +93,39 @@ button:hover{
 
 .filter{
   position:absolute;
-  top: 220px;
+  top: 25px;
   left: 10px;
   z-index: 99;
+  margin-left: 40px;
 }
 
 .filter ul{
   list-style-type: none;
-  display: inline; 
-  float: left;
-  display: block; 
+  margin:0;
+  padding:0;
+  overflow: hidden;
 }
+
+.filter li{
+  float:left;
+}
+
+a:link, a:visited{
+  display:block;
+  width:140px;
+  font-weight:bold;
+  color:#FFFFFF;
+  text-align:center;
+  padding:.2em;
+  text-decoration:none;
+  background-color: #000;
+  opacity: .5;
+}
+
+a:hover,a:active{
+  text-decoration:underline;
+}
+
 
 .expense-overlay-card{
   background-color: #fff;
@@ -113,7 +135,7 @@ button:hover{
   opacity: 0.9;
 }
 
-#expense-overlay-card:hover{
+.expense-overlay-card:hover{
   border: 2px solid #efc82c;
 }
 
