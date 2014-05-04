@@ -91,4 +91,10 @@ button:hover{
 
 .expense-vendor{
   font-size: 1.2em;
+  padding: .5em .6em;
+}
+
+.expense-amount{
+  font-size: .8em;
+  padding: .3em .6em;
 }
