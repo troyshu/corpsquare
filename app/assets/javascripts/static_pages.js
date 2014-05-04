@@ -8,16 +8,5 @@ function getExpenseReports() {
 	});
 }
 
-submitLocation = function() {
-	location = $('#input-location').val();
-
-}
-
 $(function() {
-
-	//get expense reports (here for now)
-	//expenseReports = getExpenseReports();
-
-    //add listener
-    $('#submit-location-button').click(submitLocation);
 });
