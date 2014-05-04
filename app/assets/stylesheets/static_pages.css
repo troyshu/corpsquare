@@ -6,6 +6,8 @@ html{
   background-size: cover;
   height:100%;
   margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size:16px;
 }
 
 .home-wrapper{
@@ -19,4 +21,11 @@ html{
 .logo{
 	margin: auto;
 	vertical-align: middle;
+}
+
+.tagline{
+	font-size: 1.5em;
+	width: 80%;
+	margin-left:auto;
+	margin-right:auto;
 }
