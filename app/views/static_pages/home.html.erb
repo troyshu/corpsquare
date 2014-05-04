@@ -128,7 +128,8 @@
     initializeMap();
     drawMap();
     //scroll to bottom
-    $("body").animate({ scrollBottom: $(document).height() }, "slow");
+    console.log($(document).height());
+    $("body").animate({ scrollTop: $(document).height() }, 1000);
     // google.maps.event.addDomListener(window, 'load', drawMap);
   }
 
