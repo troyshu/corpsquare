@@ -72,7 +72,7 @@
           query = "&query="+venue.name;
           //console.log('venue.name: '+venue.name);
           $.get( baseurl + query, function( data ) {
-          	//console.log(data.response.venues);
+          	console.log(data.response.venues);
             venue['latitude'] = data.response.venues[0].location.lat;
             venue['longitude'] = data.response.venues[0].location.lng;
             $( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
@@ -148,6 +148,21 @@
     });
   }
 
+  function overlayExpenses() {
+  	//append div to body
+  	expenseOverlayDiv = $("#expense-overlays");
+  	//expenseOverlayDiv.html("blah blah blah blah blah blah blah blah blah blah blah blah");
+
+  	//loop over venues by location
+  	venuesByLocation.forEach(function(venue, index){
+  		expenseOverlayDiv.append("<div class=\"expense-overlay-card\"> \
+  			<div class=\"expense-vendor\">"+venue.name+" \
+  			<div class=\"expense-amount\">$"+parseFloat(venue.amount).toFixed(2).toString()+" \
+  			</div>");
+  	});
+
+  }
+
   var submitLocation = function(event) {
     event.preventDefault();
     inputLocation = $('#input-location').val();
@@ -157,7 +172,9 @@
     //scroll to bottom
     console.log($(document).height());
     $("body").animate({ scrollTop: $(document).height() }, 1000);
-    // google.maps.event.addDomListener(window, 'load', drawMap);
+    
+    //overlay expenses
+    overlayExpenses();
   }
 
   $( document ).ready(function() {
@@ -169,4 +186,6 @@
 <h1>Dump Here:</h1>
 <div class="inner">
 </div>
+<div id="expense-overlays"></div>
 <div id="map-canvas"></div>
+

@@ -8,20 +8,6 @@ html{
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size:16px;
-
-}
-
-#expense-overlays{
-  position:absolute;
-  top: 1120px;
-  left: 10px;
-  z-index: 99;
-}
-
-body, #map-canvas {
-  height: 100%;
-  margin: 0px;
-  padding: 0px
 }
 
 .frame {
@@ -45,7 +31,8 @@ body, #map-canvas {
 .tagline{
 	font-size: 1.5em;
 	width: 50%;
-	margin: 2em auto auto auto;
+	margin-left:auto;
+	margin-right:auto;
   color:  #fff;
 }
 
@@ -79,15 +66,5 @@ button:hover{
   margin-bottom: 20px; 
   box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 ); 
   clear: both; 
-}
 
-.card-wrapper{
-  background-color: #fff;
-  width:20%;
-  margin: 1em;
-  height: 100%;
-}
-
-.card-headline{
-  font-size: 1em;
 }
