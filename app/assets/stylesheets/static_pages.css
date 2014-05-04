@@ -14,7 +14,7 @@ html{
 #expense-overlays{
   position:absolute;
   top: 20px;
-  left: 10px;
+  right: 10px;
   z-index: 99;
 }
 
@@ -97,16 +97,16 @@ button:hover{
 
 .filter{
   position:absolute;
-  top: 20px;
   left: 20px;
+  top:0px;
   z-index: 99;
   margin-left: 50px;
 }
 
 .filter ul{
   list-style-type: none;
+  padding-top:-20px;
   margin:0;
-  padding:0;
   overflow: hidden;
 
 }
@@ -123,8 +123,7 @@ button:hover{
   text-align:center;
   padding:.2em;
   text-decoration:none;
-  background-color: rgba(206, 206, 206, .5);
-  opacity: .5;
+  background-color: #fff;
 }
 
 .filter a:hover, .filter a:active{
