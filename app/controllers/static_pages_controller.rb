@@ -4,6 +4,13 @@ require 'rest-client'
 
 
 class StaticPagesController < ApplicationController
+
+  def getExpenseEntries(responseReports)
+  	#takes in a list of expense report json objects
+  	
+
+  end
+
   def home
 
 
@@ -16,10 +23,12 @@ class StaticPagesController < ApplicationController
 	# }
 	# logger.debug(res.body)
 
-	response = RestClient.get 'https://www.concursolutions.com/api/v3.0/expense/reportdigests/', { 'Authorization' => "Oauth MQHO89lqHVPrMtHTtLF3CAaf0Co=" }
+	response = RestClient.get 'https://www.concursolutions.com/api/v3.0/expense/reportdigests/', { 'Authorization' => "Oauth MQHO89lqHVPrMtHTtLF3CAaf0Co=", "accept" => "application/json"}
 
-	reportdigests = JSON.parse(response)
-	logger.debug("REPORT DIGESTS: #{reportdigests}")
+	responseReports = JSON.parse(response)["Items"]
+
+	expenseEntries = getExpenseEntries(responseReports)
+
 
   end
 

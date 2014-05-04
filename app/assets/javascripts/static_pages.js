@@ -16,7 +16,7 @@ submitLocation = function() {
 $(function() {
 
 	//get expense reports (here for now)
-	expenseReports = getExpenseReports();
+	//expenseReports = getExpenseReports();
 
     //add listener
     $('#submit-location-button').click(submitLocation);
