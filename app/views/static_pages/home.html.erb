@@ -48,7 +48,7 @@
           	console.log(data.response.venues);
             venue['latitude'] = data.response.venues[0].location.lat;
             venue['longitude'] = data.response.venues[0].location.lng;
-            $( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
+            //$( ".inner" ).append( "<p>Name:"+venue.name +"  lat:"+ venue.latitude +"  lng:"+ venue.longitude + "<\p> END");
           });
         });
   }
@@ -144,7 +144,8 @@
     drawMap();
     //scroll to bottom
     console.log($(document).height());
-    $("body").animate({ scrollTop: $(document).height() }, 1000);
+    //$("body").animate({ scrollTop: $(document).height() }, 1000);
+    $("body").animate({ scrollTop: 175 }, "slow");
     
     //overlay expenses
     overlayExpenses();
@@ -156,7 +157,7 @@
   });
 </script>
 
-<h1>Dump Here:</h1>
+
 <div class="inner">
 </div>
 <div id="expense-overlays"></div>

@@ -13,7 +13,7 @@ html{
 
 #expense-overlays{
   position:absolute;
-  top: 1120px;
+  top: 220px;
   left: 10px;
   z-index: 99;
 }
