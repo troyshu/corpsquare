@@ -8,15 +8,20 @@ html{
   margin: 0;
 }
 
-.home-wrapper{
-	display: inline-block;
-	height: 100%;
-	width: 100%;
-	text-align:center;
-	vertical-align: middle;
+.frame {
+	height: 172px;
+	text-align: center;
+	margin 0;
 }
 
-.logo{
-	margin: auto;
+.helper {
+	display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+.logo img{
+	max-height: 172px;
 	vertical-align: middle;
 }
