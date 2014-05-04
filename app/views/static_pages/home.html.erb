@@ -1,10 +1,6 @@
 <%= javascript_include_tag params[:static_pages] %>
 <%= stylesheet_link_tag "static_pages" %>
-<!--
-<video autoplay loop poster="/assets/bg.jpg" id="bgvid">
-	<source src="/assets/bg.mp4" type="video/mp4">
-</video>
--->
+<%= favicon_link_tag 'favicon.ico'%>
 
 <video autoplay loop poster="/assets/bg.jpg" id="bgvid">
   <source src="/assets/bg.webm" type="video/webm"></source>
