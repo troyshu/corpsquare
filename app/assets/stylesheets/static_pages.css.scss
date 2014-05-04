@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html {
+html{
   background: url(/assets/17H.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,7 +12,15 @@ html {
   margin: 0;
 }
 
+.home-wrapper{
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	text-align:center;
+	vertical-align: middle;
+}
+
 .logo{
-	background-image: url(../img/corpsquare.png);
 	margin: auto;
+	vertical-align: middle;
 }
